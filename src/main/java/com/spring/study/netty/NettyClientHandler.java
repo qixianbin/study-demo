@@ -23,12 +23,18 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
             long currentTimeMillis = (m.readUnsignedInt() - 2208988800L) * 1000L;
             System.out.println(new Date(currentTimeMillis));
             /**
-             * 给服务端回复消息
+             * 读完以后不要再次给服务端反馈，不然会和服务端造成死循环
              */
 //            ctx.writeAndFlush(Unpooled.wrappedBuffer(("客户端收到! 消息为: " + m.toString(Charset.defaultCharset())).getBytes()));
         } finally {
             m.release();
         }
+    }
+    
+    @Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("客户端注册完成，此方法优先于channelActive被调用");
+        super.channelRegistered(ctx);
     }
     
     /**

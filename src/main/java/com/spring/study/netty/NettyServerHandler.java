@@ -37,11 +37,24 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     }
     
     @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("服务器读完成");
+        super.channelReadComplete(ctx);
+    }
+    
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("客户端断开连接");
+        super.channelInactive(ctx);
+    }
+    
+    @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         super.exceptionCaught(ctx, cause);
         /**
          * 异常捕获
          */
+        System.out.println("客户端关闭，异常");
         cause.printStackTrace();
         ctx.close();
     }

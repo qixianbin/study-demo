@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class NettyClient {
     private int port;
     private String host = "127.0.0.1";
-    private Channel channel;
+    private volatile Channel channel;
     
     public NettyClient(int port){
         this.port = port;
@@ -129,5 +129,6 @@ public class NettyClient {
             String text = scanner.nextLine();
             channel.writeAndFlush(Unpooled.wrappedBuffer(text.getBytes()));
         }
+        
     }
 }
