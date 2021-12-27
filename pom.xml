@@ -24,8 +24,8 @@
         <java.version>1.8</java.version>
         <!--指定netty版本-->
         <netty.version>4.1.65.Final</netty.version>
-        <!--解决log4j2的jndi漏洞-->
-        <log4j2.version>2.15.0</log4j2.version>
+        <!--解决log4j2的2.16.0漏洞-->
+        <log4j2.version>2.17.0</log4j2.version>
     </properties>
 
     <dependencies>
