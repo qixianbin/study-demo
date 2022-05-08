@@ -1,7 +1,7 @@
 package com.spring.study.designpatterns.singletonpattern;
 
 public class SingletonTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         
         //DCL验证
         SingletonDCL singletonDCL = SingletonDCL.getInstance();
