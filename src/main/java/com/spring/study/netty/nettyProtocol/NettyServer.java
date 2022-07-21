@@ -16,7 +16,7 @@ public class NettyServer {
     public static void main(String[] args) throws InterruptedException {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workGroup = new NioEventLoopGroup();
-
+        MyServerTotleHandler myServerTotleHandler = new MyServerTotleHandler();
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
 
@@ -24,8 +24,8 @@ public class NettyServer {
                     .channel(NioServerSocketChannel.class)
                     .option(ChannelOption.SO_BACKLOG,128)
                     .childOption(ChannelOption.SO_KEEPALIVE,true)
-                    .childHandler(new MyServerInitializer());
-
+                    .childHandler(new MyServerInitializer(myServerTotleHandler));
+//                    .childHandler(new MyServerTotleHandler());
             //绑定端口并等待异步启动完成
             ChannelFuture future = serverBootstrap.bind(8888).sync();
             System.out.println("服务端启动成功……");

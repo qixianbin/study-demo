@@ -9,6 +9,8 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * @Description TODO
  * @Author Qi
@@ -33,15 +35,40 @@ public class NettyClient {
                             //加入解码器(接收服务端消息时调用)
                             pipeline.addLast(new MyMessageDecoder());
                             //加入自定义业务处理
-                            pipeline.addLast(new MyClientHandler());
+//                            pipeline.addLast(new MyClientHandler());
                         }
                     });
-
+            /*//同步方式启动
             ChannelFuture future = bootstrap.connect("localhost",8888).sync();
-            System.out.println("客户端启动成功……");
+            System.out.println("客户端启动成功……");*/
+            //异步方式启动，需要增加监听判断是否启动成功
+//            ChannelFuture future = bootstrap.connect("localhost", 8888);
+//            future.addListener(future1 -> {
+//                if (!future1.isSuccess()) {
+//                    System.out.println("客户端启动失败！！！！！");
+//                    System.exit(0);
+//                }
+//            });
+//            //阻塞当前
+//            future.get();
+            
+            //测试单机能创建多少个连接
+            while(!Thread.interrupted()){
+                ChannelFuture future2 = bootstrap.connect("localhost", 8888);
+                future2.addListener(future1 -> {
+                    if (!future1.isSuccess()) {
+                        System.out.println("客户端启动失败！！！！！");
+                        System.exit(0);
+                    }
+                });
+                //阻塞当前
+                future2.get();
+            }
 
-            future.channel().closeFuture().sync();
-        }finally {
+//            future.channel().closeFuture().sync();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } finally {
             group.shutdownGracefully();
         }
     }
