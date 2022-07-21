@@ -25,5 +25,6 @@ public class User {
     @TableId(value = "id",type = IdType.AUTO)
     private int id;
     @TableField("username")
-    private String username;
+    private String userName;
+    int age;
 }
