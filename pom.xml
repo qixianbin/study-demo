@@ -56,19 +56,19 @@
             <artifactId>netty-all</artifactId>
             <version>${netty.version}</version>
         </dependency>
-        <!--netty示例依赖-->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-example</artifactId>
-            <version>${netty.version}</version>
-            <!-- 排除netty-tcnative，否则netty引入报错-->
-            <exclusions>
-                <exclusion>
-                    <groupId>io.netty</groupId>
-                    <artifactId>netty-tcnative</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+        <!--netty示例依赖，此依赖会导致springboot日志失去颜色，对其他没有影响-->
+<!--        <dependency>-->
+<!--            <groupId>io.netty</groupId>-->
+<!--            <artifactId>netty-example</artifactId>-->
+<!--            <version>${netty.version}</version>-->
+<!--            &lt;!&ndash; 排除netty-tcnative，否则netty引入报错&ndash;&gt;-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>io.netty</groupId>-->
+<!--                    <artifactId>netty-tcnative</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
         <!-- mybatis-plus依赖 -->
         <dependency>
             <groupId>com.baomibing</groupId>
