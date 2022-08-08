@@ -1,14 +1,17 @@
-package com.spring.study.user.service;
+package com.spring.study.user.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.spring.study.user.service.UserService2;
 import com.spring.study.user.dao.UserMapper;
 import com.spring.study.user.entity.User;
+import com.spring.study.user.service.IUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 /**
  * @author Qi
@@ -17,22 +20,29 @@ import org.springframework.transaction.annotation.Transactional;
  * @description TODO
  * @date 2022/1/10 16:45
  */
-@Service("userService3")
-public class UserService {
+@Service("userService")
+public class UserServiceImpl implements IUserService {
 
+    private static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    UserService2 service2;
     
     @Autowired
-    UserService service;
+    UserServiceImpl2 service2;
     
+    @Autowired
+    UserServiceImpl service;
+    
+    @Override
     public User getUserById(int id){
+        log.info("id = " + id);
         return userMapper.selectById(id);
     }
     
+    @Override
     public Page<User> getUserByCondition(){
+        log.info("====");
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("id",1);
     
@@ -43,6 +53,7 @@ public class UserService {
     }
     
     
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void add() throws ClassNotFoundException {
         User u = new User();

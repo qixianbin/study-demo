@@ -2,8 +2,10 @@ package com.spring.study.user.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.spring.study.user.entity.User;
-import com.spring.study.user.service.UserService;
+import com.spring.study.user.service.IUserService;
+import com.spring.study.user.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RestController
 public class UserController {
     
+    //通过autowired注入，如果需要注入的接口有多个实现类，属性名需要跟一个实现类名字相同（属性名首字母小写）或者采用@Qualifier指定一个实现类的名字
     @Autowired
-    UserService userService;
+    IUserService userService;
     
     /**
      * @describe TODO
