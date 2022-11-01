@@ -31,10 +31,12 @@ public class NettyClient {
                         protected void initChannel(SocketChannel ch) throws Exception {
                             ChannelPipeline pipeline = ch.pipeline();
                             //加入自定义的编码器(给服务器端发送消息时调用)
-                            pipeline.addLast(new MyMessageEncoder());
-                            //加入解码器(接收服务端消息时调用)
-                            pipeline.addLast(new MyMessageDecoder());
-                            //加入自定义业务处理
+//                            pipeline.addLast(new MyMessageEncoder());
+//                            //加入解码器(接收服务端消息时调用)
+//                            pipeline.addLast(new MyMessageDecoder());
+//                            //加入自定义业务处理
+//                            pipeline.addLast(new MyClientProtocolHandler());
+                            //假如自定义注解处理bytebuf
 //                            pipeline.addLast(new MyClientHandler());
                         }
                     });
